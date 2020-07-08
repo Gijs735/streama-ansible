@@ -5,10 +5,21 @@
     dest: /opt/b2AuthorizeCfWorker.py
     mode: '0777'
 
-- name: Create cronjob for b2 worker
+- name: Create cronjob for b2 cloudflare worker
   cron:
     name: "reauthb2"
     minute: "0"
     hour: "1"
     weekday: "1,5"
     job: "/usr/bin/python3 /opt/b2AuthorizeCfWorker.py"
+
+- name: Clone B2 CLI repo
+  git:
+    repo: 'https://github.com/Backblaze/B2_Command_Line_Tool.git'
+    dest: /root
+    clone: yes
+    update: yes
+
+- name: Install B2 CLI
+  shell: /usr/bin/python3 setup.py install
+  chdir: /root/B2_Command_Line_Tool

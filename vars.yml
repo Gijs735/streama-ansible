@@ -1,5 +1,5 @@
 ---
-#MySQL
+######## MySQL #########
 mysql_root_password: "{{ db_root_pass }}"
 mysql_databases:
   - name: streama
@@ -17,12 +17,14 @@ mysql_packages:
   - mariadb-common
 mysql_datadir: /var/lib/mysql
 
-#nginx reverse proxy
+########## nginx reverse proxy #######
 nginx_revproxy_sites:                                         
   default:                                                    
     ssl: false                                                
     letsencrypt: false
+    ########################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
+  ############################################################
   streama.finestbit.com:                                                
     domains:                                                  
       - streama.finestbit.com
@@ -36,3 +38,36 @@ nginx_revproxy_certbot_auto: true
 nginx_revproxy_certbot_packages:
   - certbot
   - python3-certbot-nginx
+
+########## automysqlbackup ###########
+automysqlbackup_cron:
+  minute: 30
+  hour: 19
+  day: "*"
+  month: "*"
+  weekday: "*"
+# Setup postbackup - example: rsync backups to another host.
+automysqlbackup_postbackup: true
+automysqlbackup_postbackup_file: /etc/mysql-backup-post
+automysqlbackup_postbackup_content: |
+  #!/bin/bash
+  b2 authorize-account {{ b2AppKeyIdBackup }} {{ b2AppKeyBackup }}
+  b2 sync /var/lib/automysqlbackup b2://devbucket735/database_baks/
+# Above line configures post mysql backup na_ontap_svm_options
+# Do you wish to encrypt your backups using openssl?
+automysqlbackup_encrypt: "yes"
+# Choose a password to encrypt the backups.
+automysqlbackup_encrypt_password: "{{ db_root_pass }}"
+# backup each database in a separate directory or everything to a single file
+automysqlbackup_sepdir: 'no'
+# day of the week for weekly backups (1 to 7 where 1 is Monday)
+# Set to 0 to disable weekly backups.
+automysqlbackup_doweekly: 0
+automysqlbackup_domonthly: 0
+# Set rotation of daily backups. VALUE*24hours
+# If you want to keep only today's backups, you could choose 1, i.e. everything older than 24hours will be removed.
+automysqlbackup_rotationdaily: 6
+automysqlbackup_rotationweekly: 0
+automysqlbackup_rotationmonthly: 0
+# whether to include a create database statement
+automysqlbackup_createdb_stmt: 'yes'

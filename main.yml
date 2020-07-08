@@ -6,6 +6,7 @@
   - vars.yml
   roles:
     - role: geerlingguy.mysql
+    - role: cloudflare_cdn
+    - role: ansible-role-automysqlbackup
     - role: streama
     - role: hispanico.nginx-revproxy
-    - role: cloudflare_cdn
