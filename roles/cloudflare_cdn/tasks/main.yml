@@ -16,7 +16,7 @@
 - name: Clone B2 CLI repo
   git:
     repo: 'https://github.com/Backblaze/B2_Command_Line_Tool.git'
-    dest: /root
+    dest: /root/B2_Command_Line_Tool
     clone: yes
     update: yes
 
