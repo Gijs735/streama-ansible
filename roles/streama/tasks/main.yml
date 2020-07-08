@@ -13,12 +13,20 @@
     mode: '0777'
 
 - name: Untar the archives
-  shell: cat /opt/streama.tar.gz.* | tar -C /opt xzvf -
+  shell: cat /opt/streama.tar.gz.* | tar xzvf - -C /opt
 
 - name: remove the archives
   file:
     path: /opt/streama.tar.gz.*
     state: absent
+
+- name: Set permissions for the jar
+  file:
+    path: /opt/streama.jar
+    state: file
+    owner: root
+    group: root
+    mode: '0777'
 
 - name: Create streama service
   template:
