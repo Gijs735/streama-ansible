@@ -13,7 +13,7 @@
     mode: '0777'
 
 - name: Untar the archives
-  shell: cat streama.tar.gz.* | tar xzvf -
+  shell: cat /opt/streama.tar.gz.* | tar -C /opt xzvf -
 
 - name: remove the archives
   file:
