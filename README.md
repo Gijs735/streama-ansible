@@ -5,6 +5,7 @@ This repo will install streama using ansible and/or cloud-init.
 * Streama
 * MariaDB
 * nginx reverse proxy with a letsencrypt SSL certificate (can be configured)
+* A Terraform script for an easy deploy on Hetzer and cloudflare.
 
 #### Things to do before using:
 * Make sure the the latest streama version is packed. Currenly **version 1.9.1** is packed. You can pack you own version by reading the readme [here](files).
