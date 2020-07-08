@@ -4,13 +4,21 @@
     name: openjdk-8-jre
     state: present
 
-- name: Copy streama jar
+- name: Copy the (custom) streama jar
   copy:
-    src: streama.jar
-    dest: /opt/streama.jar
+    src: tars/
+    dest: /opt
     owner: root
     group: root
     mode: '0777'
+
+- name: Untar the archives
+  shell: cat streama.tar.gz.* | tar xzvf -
+
+- name: remove the archives
+  file:
+    path: /opt/streama.tar.gz.*
+    state: absent
 
 - name: Create streama service
   template:
