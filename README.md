@@ -7,7 +7,7 @@ Included is:
 - nginx reverse proxy with a letsencrypt SSL certificate (can be configured)
 
 Things to do before using:
-- Make sure the the latest streama version is packed. Currenly **version 1.9.1** is packed. You can pack you own version by reading the readme here: [files](files)
+- Make sure the the latest streama version is packed. Currenly **version 1.9.1** is packed. You can pack you own version by reading the readme [here](files)
 - Make sure vars.yml is correct for your use-case, especially the domains part.
 - cloud-init.yml pulls from this git repo, if you don't want this change the url.
 - put a database password into cloud init instead of the default `PASSWORD`.
