@@ -27,4 +27,4 @@ This repo will install streama using ansible and/or cloud-init.
     ansible-galaxy install -r requirements.yml
     ansible-playbook --vault-id db@prompt main.yml
     
-Everything was tested on on Ubuntu 18.04. Cloud init was tested on [hetzner](hetzner.de).
+Everything was tested on on Ubuntu 18.04. Cloud init was tested on [hetzner cloud](https://www.hetzner.com/cloud).
