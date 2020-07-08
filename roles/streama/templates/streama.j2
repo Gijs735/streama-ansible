@@ -1,0 +1,13 @@
+[Unit]
+Description=streama
+After=syslog.target
+
+[Service]
+WorkingDirectory=/opt
+ExecStart=/usr/bin/java -jar /opt/streama.jar
+SuccessExitStatus=143
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

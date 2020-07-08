@@ -1,0 +1,34 @@
+---
+#MySQL
+mysql_root_password: "{{ db_root_pass }}"
+mysql_databases:
+  - name: streama
+    encoding: utf8
+    collation: utf8_general_ci
+mysql_users:
+  - name: streama
+    host: "%"
+    password: "{{ db_user_pass }}"
+    priv: "streama.*:ALL"
+mysql_bind_address: '127.0.0.1'
+mysql_packages:
+  - mariadb-client
+  - mariadb-server
+  - python-mysqldb
+mysql_datadir: /var/lib/mysql
+
+#nginx reverse proxy
+nginx_revproxy_sites:                                         
+  default:                                                    
+    ssl: false                                                
+    letsencrypt: false
+  devstream.finestbit.com:                                                
+    domains:                                                  
+      - devstream.finestbit.com
+      - www.devstream.finestbit.com
+    upstreams:                                                
+      - { backend_address: 127.0.0.1, backend_port: 8080 }
+    ssl: true                                                 
+    letsencrypt: true                                       
+    letsencrypt_email: "none@none.com"                        
+nginx_revproxy_certbot_auto: true                             

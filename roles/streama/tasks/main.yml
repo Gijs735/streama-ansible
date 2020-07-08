@@ -1,0 +1,29 @@
+---
+- name: Install Java 8
+  package:
+    name: openjdk-8-jre
+    state: present
+
+- name: Copy streama jar
+  copy:
+    src: streama.jar
+    dest: /opt/streama.jar
+    owner: root
+    group: root
+    mode: '0777'
+
+- name: Create streama service
+  template:
+    src: streama.j2
+    dest: /etc/systemd/system/streama.service
+
+- name: Copy streama configuration
+  template:
+    src: application.j2
+    dest: /opt/application.yml
+
+- name: Start and enable streama service
+  service:
+    name: streama
+    state: started
+    enabled: yes

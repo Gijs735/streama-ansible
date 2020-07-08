@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  become: yes
+  vars_files:
+  - secret.yml
+  - vars.yml
+  roles:
+    - role: init
+    - role: geerlingguy.mysql
+    - role: streama
+    - role: hispanico.nginx-revproxy
