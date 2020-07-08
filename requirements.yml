@@ -5,4 +5,3 @@
 
 - name: install nginx role
   src: https://github.com/hispanico/ansible-nginx-revproxy
-  version: 1.3.0
