@@ -14,8 +14,8 @@ Things to do before using:
 - Delete secret.yml, then run:
     ansible-vault create --vault-id db@prompt secret.yml
 - put in the following data:
-    db_user_pass: 896912666
-    db_root_pass: 896912666
+    db_user_pass: PASSWORD
+    db_root_pass: PASSWORD
 
 After this is done run:
     ansible-galaxy install -r requirements.yml
