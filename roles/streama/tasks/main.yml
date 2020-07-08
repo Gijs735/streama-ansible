@@ -17,7 +17,7 @@
 
 - name: remove the archives
   file:
-    path: /opt/streama.tar.gz.*
+    path: '/opt/streama.tar.gz.*'
     state: absent
 
 - name: Set permissions for the jar
