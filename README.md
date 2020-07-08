@@ -18,7 +18,7 @@ Things to do before using:
 - put in the following data:
     db_user_pass: `PASSWORD`
     db_root_pass: `PASSWORD`
-
+- Make sure your DNS is correctly configured
 After this is done run:
     
     ansible-galaxy install -r requirements.yml
