@@ -1,0 +1,14 @@
+---
+- name: copy backblaze auth worker
+  template:
+    src: b2AuthorizeCfWorker.j2
+    dest: /opt/b2AuthorizeCfWorker.py
+    mode: '0777'
+
+- name: Create cronjob for b2 worker
+  cron:
+    name: "reauthb2"
+    minute: "0"
+    hour: "1"
+    weekday: "1,5"
+    job: "/usr/bin/python3 /opt/b2AuthorizeCfWorker.py"

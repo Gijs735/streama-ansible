@@ -22,10 +22,11 @@ nginx_revproxy_sites:
   default:                                                    
     ssl: false                                                
     letsencrypt: false
-  devstream.finestbit.com:                                                
+  ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
+  streama.finestbit.com:                                                
     domains:                                                  
-      - devstream.finestbit.com
-      - www.devstream.finestbit.com
+      - streama.finestbit.com
+      - www.streama.finestbit.com
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8080 }
     ssl: true                                                 

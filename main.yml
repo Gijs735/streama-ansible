@@ -8,3 +8,4 @@
     - role: geerlingguy.mysql
     - role: streama
     - role: hispanico.nginx-revproxy
+    - role: cloudflare_cdn
