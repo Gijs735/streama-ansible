@@ -20,8 +20,8 @@ This repo will install streama using ansible and/or cloud-init.
         ```
 * If using you're letsencrypt, make sure your DNS is correctly configured .
 * If you're using cloud init be aware of the following:
-    * *Cloud-init.yml* pulls from this git repo, if you don't want this change the url inside. This is highly recommended because you don't know the password for secret.yml and this will probably make your installation fail.
-    * Put a database password in *cloud-init.yml*, instead of the default.
+    * *Cloud-init.yml* pulls from this git repo, if you don't want this change the url inside the file. This is highly recommended because you don't know the password for secret.yml and this will probably make your installation fail.
+    * Put a database password in *cloud-init.yml*, instead of the default. The password will be deleted after cloud init finishes.
 #### After this is done run:
     
     ansible-galaxy install -r requirements.yml
