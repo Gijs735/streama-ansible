@@ -22,4 +22,5 @@
 
 - name: Install B2 CLI
   shell: /usr/bin/python3 setup.py install
-  chdir: /root/B2_Command_Line_Tool
+  args:
+    chdir: /root/B2_Command_Line_Tool
