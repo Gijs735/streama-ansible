@@ -5,6 +5,3 @@
 
 - name: hispanico.nginx-revproxy
   src: https://github.com/hispanico/ansible-nginx-revproxy
-
-- name: ansible-role-automysqlbackup
-  src: https://github.com/guisea/ansible-role-automysqlbackup
