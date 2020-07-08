@@ -24,3 +24,22 @@
   shell: /usr/bin/python3 setup.py install
   args:
     chdir: /root/B2_Command_Line_Tool
+
+- name: Create backup script
+  copy:
+    dest: "/root/backup_database.sh"
+    content: "{{ backup_database_script }}"
+    mode: '0777'
+
+- name: Create backup folder
+  file:
+    path: /opt/dbbackup/
+    state: directory
+    mode: '0777'
+
+- name: Create cronjob for database backup
+  cron:
+    name: "backup_mysql"
+    minute: "5"
+    hour: "4"
+    job: "/bin/bash /root/backup_database.sh"
