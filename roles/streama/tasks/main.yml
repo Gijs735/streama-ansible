@@ -4,6 +4,11 @@
     name: openjdk-8-jre
     state: present
 
+- name: Remove old jar if exists
+  file:
+    path: /opt/streama.jar
+    state: absent
+
 - name: Copy the (custom) streama jar
   copy:
     src: tars/
@@ -11,11 +16,6 @@
     owner: root
     group: root
     mode: '0777'
-
-- name: Remove old jar if exists
-  file:
-    path: /opt/streama.jar
-    state: absent
 
 - name: Untar the archives
   shell: cat /opt/streama.tar.gz.* | tar xzvf - -C /opt
