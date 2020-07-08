@@ -1,9 +1,0 @@
----
-- name: install git
-  package:
-    name: git
-    state: present
-
-- name: Install galaxy roles
-  local_action:
-    command ansible-galaxy install -r requirements.yml

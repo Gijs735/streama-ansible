@@ -5,7 +5,6 @@
   - secret.yml
   - vars.yml
   roles:
-    - role: init
     - role: geerlingguy.mysql
     - role: streama
     - role: hispanico.nginx-revproxy
