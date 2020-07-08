@@ -1,5 +1,5 @@
 # streama-ansible
-This repo will install streama with ansible and/or cloud-init.
+This repo will install streama using ansible and/or cloud-init.
 
 #### Included is:
 * Streama
