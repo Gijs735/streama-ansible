@@ -16,9 +16,7 @@
   shell: cat /opt/streama.tar.gz.* | tar xzvf - -C /opt
 
 - name: remove the archives
-  file:
-    path: '/opt/streama.tar.gz.*'
-    state: absent
+  shell: /opt/streama.tar.gz.*
 
 - name: Set permissions for the jar
   file:

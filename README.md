@@ -1,7 +1,6 @@
-# streama-
-apt update
-apt install git
-apt install ansible
+# streama-ansible
+apt-get update
+apt-get install -y git ansible
 git clone https://github.com/Gijs735/streama-ansible.git
 
 password
