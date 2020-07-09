@@ -48,14 +48,14 @@
   shell: |
     FILE=/opt/dbbackup/backup.sql
     export HOME=/root
-    /usr/local/bin/b2 authorize-account {{ b2AppKeyIdBackup }} {{ b2AppKeyBackup }}
+    /usr/local/bin/b2 authorize-account {{ b2AppKeyIdBackup }} {{ b2AppKeyBackup }} || true
     /usr/local/bin/b2 download-file-by-name dbbucket backup.sql $FILE || true
     if [ -f "$FILE" ]; then
         echo "$FILE already exists."
     else
         touch $FILE
     fi
-    mysql -u $(grep user ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}') -p$(grep password ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}') < $FILE
+    mysql -u root < $FILE
 
   args:
     executable: /bin/bash
