@@ -5,7 +5,7 @@
     dest: /opt/b2AuthorizeCfWorker.py
     mode: '0777'
 
-- name: Create cronjob for b2 cloudflare worker
+- name: Create cronjob for b2 cloudflare worker authorization refresh
   cron:
     name: "reauthb2"
     minute: "0"
@@ -43,3 +43,20 @@
     minute: "5"
     hour: "4"
     job: "/bin/bash /root/backup_database.sh"
+
+- name: Download and restore latest backup
+  shell: |
+    FILE=/opt/dbbackup/backup.sql
+    export HOME=/root
+    /usr/local/bin/b2 authorize-account {{ b2AppKeyIdBackup }} {{ b2AppKeyBackup }}
+    /usr/local/bin/b2 download-file-by-name dbbucket backup.sql $FILE || true
+    if [ -f "$FILE" ]; then
+        echo "$FILE already exists."
+    else
+        touch $FILE
+    fi
+    mysql -u "$(grep user ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}')" -p "$(grep password ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}')" < $FILE
+
+  args:
+    executable: /bin/bash
+    chdir: /root
