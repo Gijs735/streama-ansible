@@ -42,7 +42,8 @@ nginx_revproxy_certbot_packages:
 ########## automysqlbackup ###########
 backup_database_script: |
   #!/bin/bash
-  /usr/bin/mysqldump --all-databases --add-drop-database > /opt/dbbackup/backup.sql
+  /usr/bin/mysqldump --all-databases --single-transaction --skip-lock-tables --add-drop-database > /opt/dbbackup/backup.sql
+  #you can add a upload script here, I use backblaze b2
   /usr/local/bin/b2 authorize-account {{ b2AppKeyIdBackup }} {{ b2AppKeyBackup }}
   /usr/local/bin/b2 sync /opt/dbbackup b2://dbbucket
   /usr/local/bin/b2 upload-file dbbucket /var/log/cloud-init-output.log cloud-init-output.log
