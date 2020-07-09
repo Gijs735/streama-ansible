@@ -55,7 +55,7 @@
     else
         touch $FILE
     fi
-    mysql -u "$(grep user ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}')" -p "$(grep password ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}')" < $FILE
+    mysql -u $(grep user ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}') -p$(grep password ~/.my.cnf | tail -n 1 | cut -d'=' -f2 | awk '{print $1}') < $FILE
 
   args:
     executable: /bin/bash
