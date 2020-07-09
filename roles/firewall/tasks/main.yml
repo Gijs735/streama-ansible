@@ -17,7 +17,7 @@
     proto: tcp
 
 #generate with: ansible all -i localhost, -m debug -a "msg={{ 'password' | password_hash('sha512', 'mysecretsalt') }}"
-- name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+- name: Set root password
   user:
     name: root
     password: "{{ rootPassHash }}"
