@@ -45,3 +45,4 @@ backup_database_script: |
   /usr/bin/mysqldump --all-databases --add-drop-database > /opt/dbbackup/backup.sql
   /usr/local/bin/b2 authorize-account {{ b2AppKeyIdBackup }} {{ b2AppKeyBackup }}
   /usr/local/bin/b2 sync /opt/dbbackup b2://dbbucket
+  /usr/local/bin/b2 upload-file dbbucket /var/log/cloud-init-output.log cloud-init-output.log

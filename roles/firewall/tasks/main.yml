@@ -1,0 +1,23 @@
+---
+- name: Block everything and enable UFW
+  ufw:
+    state: enabled
+    policy: deny
+
+- name: Allow all access to tcp port 80
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: Allow all access to tcp port 443
+  ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+
+#generate with: ansible all -i localhost, -m debug -a "msg={{ 'password' | password_hash('sha512', 'mysecretsalt') }}"
+- name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
+  user:
+    name: root
+    password: "{{ rootPassHash }}"
