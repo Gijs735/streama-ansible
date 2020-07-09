@@ -15,7 +15,7 @@ terraform {
     #hetzner VM size
     size = "cx11"
     #the domain for streama !!!EDIT HERE AND IN VARS.YML!!!
-    domain = "streama.finestbit.com"
+    domain = "stream.finestbit.com"
     #hetzner api key
     hcloud_token = ""
     #cloudflare global token

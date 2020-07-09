@@ -25,10 +25,10 @@ nginx_revproxy_sites:
     ########################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
   ############################################################
-  streama.finestbit.com:                                                
+  stream.finestbit.com:                                                
     domains:                                                  
-      - streama.finestbit.com
-      - www.streama.finestbit.com
+      - stream.finestbit.com
+      - www.stream.finestbit.com
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8080 }
     ssl: true                                                 
