@@ -88,7 +88,7 @@ server {
       alias /var/www/{{ item.key }}/.well-known/acme-challenge;
    }
 
-   location {{ item.value.nginx_location_proxy }} {
+   location {{ item.value.nginx_location }} {
       gzip off;
       proxy_set_header X-Forwarded-Ssl on;
       client_max_body_size {{ item.value.client_max_body_size | default('50M') }};
