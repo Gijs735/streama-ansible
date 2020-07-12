@@ -78,7 +78,7 @@
     --email {{ item.value.letsencrypt_email }}
     --non-interactive --cert-name {{ item.key }}
     --agree-tos
-    --preferred-challenges http --dry-run creates=/etc/letsencrypt/live/{{ item.key }}/fullchain.pem
+    --preferred-challenges http creates=/etc/letsencrypt/live/{{ item.key }}/fullchain.pem
   with_dict: "{{ nginx_revproxy_sites }}"
   when: item.value.letsencrypt | default(False)
   tags:

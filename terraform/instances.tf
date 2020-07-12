@@ -17,7 +17,8 @@ terraform {
     #the domain for streama !!!EDIT HERE AND IN VARS.YML!!!
     domain = "fireflix.stream"
     #hetzner api key
-    hcloud_token = ""
+    hcloud_token = "
+    "
     #cloudflare global token
     cfapikey = ""
     #cloudflare zone id

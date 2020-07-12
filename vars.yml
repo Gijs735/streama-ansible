@@ -35,15 +35,15 @@ nginx_revproxy_sites:
     letsencrypt: true                                       
     letsencrypt_email: "none@none.com"   
 
-    app.fireflix.stream:                                                
-      domains:                                                  
-        - app.fireflix.stream
-        - www.app.fireflix.stream
-      upstreams:                                                
-        - { backend_address: 127.0.0.1, backend_port: 8081 }
-      ssl: true                                                 
-      letsencrypt: true                                       
-      letsencrypt_email: "none@none.com"                      
+  app.fireflix.stream:                                                
+    domains:                                                  
+      - app.fireflix.stream
+      - www.app.fireflix.stream
+    upstreams:                                                
+      - { backend_address: 127.0.0.1, backend_port: 8081 }
+    ssl: true                                                 
+    letsencrypt: true                                       
+    letsencrypt_email: "none@none.com"                      
 nginx_revproxy_certbot_auto: true
 nginx_revproxy_certbot_packages:
   - certbot
