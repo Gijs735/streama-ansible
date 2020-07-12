@@ -22,7 +22,7 @@ nginx_revproxy_sites:
   ##############################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
   ##############################################################                                   
-  default:                                                    
+  fireflix.stream:                                                    
     domains:                                                  
       - fireflix.stream
       - www.fireflix.stream
