@@ -44,3 +44,23 @@ resource "cloudflare_record" "wwwdomain" {
   ttl     = 1
   proxied = true
 }
+
+resource "cloudflare_record" "appdomain" {
+  depends_on = [hcloud_server.streama]
+  zone_id = var.cfzoneid
+  name    = "app.${var.domain}"
+  value   = hcloud_server.streama.ipv4_address
+  type    = "A"
+  ttl     = 1
+  proxied = true
+}
+
+resource "cloudflare_record" "wwwappdomain" {
+  depends_on = [hcloud_server.streama]
+  zone_id = var.cfzoneid
+  name    = "www.app.${var.domain}"
+  value   = hcloud_server.streama.ipv4_address
+  type    = "A"
+  ttl     = 1
+  proxied = true
+}

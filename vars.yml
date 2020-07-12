@@ -1,5 +1,4 @@
 ---
-nginx_streama_full_url: https://fireflix.stream/app/
 ######## MySQL #########
 mysql_root_password: "{{ db_root_pass }}"
 mysql_databases:
@@ -19,22 +18,27 @@ mysql_packages:
 mysql_datadir: /var/lib/mysql
 
 ########## nginx reverse proxy #######
-nginx_revproxy_sites:                                         
-  default:                                                    
-    ssl: false                                                
-    letsencrypt: false
-    ########################################################
+nginx_revproxy_sites:      
+  ##############################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
-  ############################################################
-  fireflix.stream:                                                
+  ##############################################################                                   
+  default:                                                    
     domains:                                                  
       - fireflix.stream
       - www.fireflix.stream
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8080 }
     ssl: true                                                 
-    letsencrypt: true                                   
-    nginx_location: /app/
+    letsencrypt: true
+    letsencrypt_email: "none@none.com"  
+  app.fireflix.stream:                                                
+    domains:                                                  
+      - app.fireflix.stream
+      - www.app.fireflix.stream
+    upstreams:                                                
+      - { backend_address: 127.0.0.1, backend_port: 8081 }
+    ssl: true                                                 
+    letsencrypt: true
     letsencrypt_email: "none@none.com"                        
 nginx_revproxy_certbot_auto: true
 nginx_revproxy_certbot_packages:
