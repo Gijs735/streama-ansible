@@ -18,31 +18,32 @@ mysql_packages:
 mysql_datadir: /var/lib/mysql
 
 ########## nginx reverse proxy #######
-nginx_revproxy_sites:  
-  default:
-    ssl: false
-    letsencrypt: false    
-  ##############################################################
+nginx_revproxy_sites:                                         
+  default:                                                    
+    ssl: false                                                
+    letsencrypt: false
+    ########################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
-  ##############################################################                                   
-  fireflix.stream:                                                    
+  ############################################################
+  fireflix.stream:                                                
     domains:                                                  
       - fireflix.stream
       - www.fireflix.stream
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8080 }
     ssl: true                                                 
-    letsencrypt: true
-    letsencrypt_email: "none@none.com"  
-  app.fireflix.stream:                                                
-    domains:                                                  
-      - app.fireflix.stream
-      - www.app.fireflix.stream
-    upstreams:                                                
-      - { backend_address: 127.0.0.1, backend_port: 8081 }
-    ssl: true                                                 
-    letsencrypt: true
-    letsencrypt_email: "none@none.com"                        
+    letsencrypt: true                                       
+    letsencrypt_email: "none@none.com"   
+
+    app.fireflix.stream:                                                
+      domains:                                                  
+        - app.fireflix.stream
+        - www.app.fireflix.stream
+      upstreams:                                                
+        - { backend_address: 127.0.0.1, backend_port: 8081 }
+      ssl: true                                                 
+      letsencrypt: true                                       
+      letsencrypt_email: "none@none.com"                      
 nginx_revproxy_certbot_auto: true
 nginx_revproxy_certbot_packages:
   - certbot
