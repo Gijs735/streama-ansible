@@ -29,6 +29,7 @@ nginx_revproxy_sites:
     domains:                                                  
       - fireflix.stream
       - www.fireflix.stream
+      - test1.fireflix.stream
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8080 }
     ssl: true                                                 
@@ -39,6 +40,7 @@ nginx_revproxy_sites:
     domains:                                                  
       - app.fireflix.stream
       - www.app.fireflix.stream
+      - test2.fireflix.stream
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8081 }
     ssl: true                                                 
