@@ -25,7 +25,7 @@ nginx_revproxy_sites:
     ########################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
   ############################################################
-  fireflix.stream/app:                                                
+  fireflix.stream:                                                
     domains:                                                  
       - fireflix.stream/app
       - www.fireflix.stream/app
