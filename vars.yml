@@ -18,7 +18,10 @@ mysql_packages:
 mysql_datadir: /var/lib/mysql
 
 ########## nginx reverse proxy #######
-nginx_revproxy_sites:      
+nginx_revproxy_sites:  
+  default:
+    ssl: false
+    letsencrypt: false    
   ##############################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
   ##############################################################                                   
