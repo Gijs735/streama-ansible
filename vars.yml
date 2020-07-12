@@ -25,10 +25,10 @@ nginx_revproxy_sites:
     ########################################################
   ###!!!!!EDIT DOMAIN HERE AND IN INSTANCES.TF (TERRAFORM)!!!###
   ############################################################
-  stream.finestbit.com:                                                
+  fireflix.stream/app:                                                
     domains:                                                  
-      - stream.finestbit.com
-      - www.stream.finestbit.com
+      - fireflix.stream/app
+      - www.fireflix.stream/app
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8080 }
     ssl: true                                                 
