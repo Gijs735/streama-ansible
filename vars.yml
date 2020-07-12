@@ -1,4 +1,5 @@
 ---
+nginx_streama_full_url: https://fireflix.stream/app/
 ######## MySQL #########
 mysql_root_password: "{{ db_root_pass }}"
 mysql_databases:
