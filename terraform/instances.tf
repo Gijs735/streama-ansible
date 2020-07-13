@@ -17,14 +17,13 @@ terraform {
     #the domain for streama !!!EDIT HERE AND IN VARS.YML!!!
     domain = "fireflix.stream"
     #hetzner api key
-    hcloud_token = "
-    "
+    hcloud_token = "xKNdU3vMKlC1Kwda0qcwGOuseXFI20tNPFqbraaPwftNjusAvShXGhSprZRslVnL"
     #cloudflare global token
-    cfapikey = ""
+    cfapikey = "0ce62d256c763aaa9b4b71b83e23caebf3616"
     #cloudflare zone id
-    cfzoneid = ""
+    cfzoneid = "c1c89878b83f977facc237e474abae1b"
     #cloudflare e-mail
-    cfemail = ""
+    cfemail = "gijs15_9@hotmail.com"
     #cloudflare account id
-    cfaccid = ""
+    cfaccid = "43a65a3768f2569190b5ad4b041b34a4"
  }
