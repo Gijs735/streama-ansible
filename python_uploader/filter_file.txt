@@ -1,0 +1,3 @@
+- **Plex Versions**
++ **.{mp4,mkv,flv,avi,mpg,mov,wmv,m4p,m4v,mpg2,mpeg,mpe,mpv,m2v,3gp,3g2,f4v,f4p,f4a,f4b,amv,ogg,ogv}
+- *
