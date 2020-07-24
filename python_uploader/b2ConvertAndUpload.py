@@ -210,9 +210,9 @@ def mainMovie():
 
 
 def mainSerie():
-    # createFileList("sftp_hetzner:/G:/amerikaanse series", "data/src_serielist.txt")
-    # createFileList("b2:devbucket735/TV", "data/dest_serielist.txt")
-    # dedupeFileLists("data/src_serielist.txt", "data/dest_serielist.txt", "data/parsedSerielist.txt")
+    createFileList("sftp_hetzner:/G:/amerikaanse series", "data/src_serielist.txt")
+    createFileList("b2:devbucket735/TV", "data/dest_serielist.txt")
+    dedupeFileLists("data/src_serielist.txt", "data/dest_serielist.txt", "data/parsedSerielist.txt")
     with open("data/parsedSerielist.txt",'r') as f:
         lines = f.readlines()
         for line in lines:
