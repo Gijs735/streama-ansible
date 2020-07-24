@@ -252,3 +252,6 @@ def mainSerie():
                 addSerieToStreama(showname, seasonnumber, episodenumber[0].split("E",1)[1], episodeurl)
 
 mainSerie()
+
+## FIX MOVIE DEDUPE (Movies/...Rarbg.mp4 vs Elysium (2013).mp4)
+## FIX JAPANESE SUBS NOT ENCODING
