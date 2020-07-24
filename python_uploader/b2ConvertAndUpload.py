@@ -93,11 +93,11 @@ def mainMovie():
             b2mp4path="devbucket735/Movies/"+oldfilefolder
             print(b2mp4path)
 
-            # downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/films/" + fullpath + "\'")
-            # proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
-            # Trace(proc)
-            # uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
-            # os.remove("/tmp/download/"+oldfilepath)
+            downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/films/" + fullpath + "\'")
+            proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            Trace(proc)
+            uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
+            os.remove("/tmp/download/"+oldfilepath)
 
 
 def mainSerie():
