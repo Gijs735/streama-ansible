@@ -84,7 +84,9 @@ def uploadToBackBlaze(convertedFile, b2path):
 
 
 def addMovieToStreama(moviename,movieyear,movieurl):
-    driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://app.fireflix.stream/login/auth")
     WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
     username = driver.find_element_by_xpath("//input[@placeholder='Username']")
@@ -135,7 +137,9 @@ def addMovieToStreama(moviename,movieyear,movieurl):
         input("Press Enter to continue when this is done...")
 
 def addSerieToStreama(showname, seasonnumber, episodenumber, episodeurl):
-    driver = webdriver.Chrome()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://app.fireflix.stream/login/auth")
     WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
     username = driver.find_element_by_xpath("//input[@placeholder='Username']")
@@ -233,6 +237,7 @@ def mainSerie():
                 seasonnumber = oldfilefolder.split("/", 1)[1].split(" ", 1)[1]
             episodenumber = re.findall(r"E[0-9]+",oldfilepath)
             showname = showname.replace('(2019)', '') # fix another life show
+            showname = showname.replace('(2020)', '') # fix amazing stories show
 
             downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/amerikaanse series/" + fullpath + "\'")
             proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
