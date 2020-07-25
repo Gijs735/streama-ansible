@@ -41,9 +41,9 @@ def AutoSelectSubNeeded(file):
         print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language:")
         userinput = input()
         if userinput == "y" or userinput == "Y":
-            return True
-        elif userinput == "n" or userinput == "N":
             return False
+        elif userinput == "n" or userinput == "N":
+            return True
         else:
             return AutoSelectSubNeeded(file)
     else:
