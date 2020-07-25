@@ -285,7 +285,7 @@ def mainSerie():
             else:
                 addSerieToStreama(showname, seasonnumber, episodenumber[0].split("E",1)[1], episodeurl)
 
-print(AutoSelectSubNeeded("/home/gijs/Videos/Shrek (2001)/Shrek.2001.1080p.BluRay.H264.AAC-RARBG.mp4"))
+mainMovie()
 
 
 ## pip install selenium
