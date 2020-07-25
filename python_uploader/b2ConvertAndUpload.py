@@ -163,6 +163,7 @@ def addMovieToStreama(moviename,movieyear,movieurl):
         print("The movie: " + moviename + ", release year: " + movieyear + " could not be found!")
         print("Please add this movie manually.")
         input("Press Enter to continue when this is done...")
+        driver.quit()
 
 def addSerieToStreama(showname, seasonnumber, episodenumber, episodeurl):
     chrome_options = webdriver.ChromeOptions()
