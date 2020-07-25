@@ -292,3 +292,4 @@ mainMovie()
 ## pip install subprocess32
 ## handbrake / handbrake cli
 ## https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
+## rclone : curl https://rclone.org/install.sh | sudo bash
