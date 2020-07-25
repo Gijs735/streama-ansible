@@ -162,6 +162,7 @@ def addMovieToStreama(moviename,movieyear,movieurl):
     else:
         print("The movie: " + moviename + ", release year: " + movieyear + " could not be found!")
         print("Please add this movie manually.")
+        print("URL: " + movieurl)
         input("Press Enter to continue when this is done...")
         driver.quit()
 
@@ -241,7 +242,6 @@ def mainMovie():
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
             os.remove("/tmp/download/"+oldfilepath)
-            print(oldfilefolder[:-6] + oldfilefolder[-5:-1] + movieurl)
             addMovieToStreama(oldfilefolder[:-6], oldfilefolder[-5:-1], movieurl)
 
 
@@ -289,8 +289,9 @@ def mainSerie():
 mainMovie()
 
 
-## pip install selenium
-## pip install subprocess32
-## handbrake / handbrake cli
+## pip3 install selenium
+## pip3 install subprocess32
+## sudo apt install handbrake-cli
+## curl https://rclone.org/install.sh | sudo bash
 ## https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
-## rclone : curl https://rclone.org/install.sh | sudo bash
+## Firewall IP
