@@ -28,6 +28,26 @@ def Trace(proc):
             print(line)
             proc.stdout.flush()
 
+def getAudioLanguage(file):
+    cmnd = ['ffprobe', file, '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
+    p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out =  p.communicate()[0]
+    out = (out.decode('utf-8'))
+    return out
+
+def AutoSelectSubNeeded(file):
+    if not "eng" in getAudioLanguage(file):
+        print("English audio not detected in: " + file)
+        print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language:")
+        userinput = input()
+        if userinput == "y" or userinput == "Y":
+            return True
+        elif userinput == "n" or userinput == "N":
+            return False
+        else:
+            return AutoSelectSubNeeded(file)
+    else:
+        return False
 
 def createFileList(location, filepath):
     print("Creating file list for remote: " + location)
@@ -45,7 +65,7 @@ def createFileList(location, filepath):
     f.close()
 
 
-def dedupeFileLists(file1, file2, outputfile):
+def dedupeFileLists(file1, file2, outputfile, movie = False):
     print("Deduping...")
     lower_filter_lines = list()
     with open(file2,'r+') as source:
@@ -56,12 +76,20 @@ def dedupeFileLists(file1, file2, outputfile):
     
     for lowerline in filter_lines:
         lowerline = os.path.splitext(lowerline)[0]
+        if movie == True:
+            lowerline = lowerline.split("/", 1)[0]
         lower_filter_lines.append(lowerline.lower())
-
-    with open(outputfile, 'w') as target:
-        for line in lines:
-            if os.path.splitext(line.lower())[0] not in lower_filter_lines:
-                target.write(line)
+    if movie == False:
+        with open(outputfile, 'w') as target:
+            for line in lines:
+                if os.path.splitext(line.lower())[0] not in lower_filter_lines:
+                    target.write(line)
+    else:
+        with open(outputfile, 'w') as target:
+            for line in lines:
+                lineinlowercase = os.path.splitext(line.lower())[0]
+                if lineinlowercase.split("/", 1)[0] not in lower_filter_lines:
+                    target.write(line)
     print("Created deduped file: " + outputfile + " containing content from: " + file1 + " minus the content from: " + file2)
 
 
@@ -191,7 +219,7 @@ def addSerieToStreama(showname, seasonnumber, episodenumber, episodeurl):
 def mainMovie():
     createFileList("sftp_hetzner:/G:/films", "data/src_movielist.txt")
     createFileList("b2:devbucket735/Movies", "data/dest_movielist.txt")
-    dedupeFileLists("data/src_movielist.txt", "data/dest_movielist.txt", "data/parsedMovielist.txt")
+    dedupeFileLists("data/src_movielist.txt", "data/dest_movielist.txt", "data/parsedMovielist.txt", True)
     with open("data/parsedMovielist.txt",'r') as f:
         lines = f.readlines()
         for line in lines:
@@ -205,7 +233,10 @@ def mainMovie():
             movieurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/Movies/"+oldfilefolder+"/"+oldfilefolder + ".mp4")
 
             downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/films/" + fullpath + "\'")
-            proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
+                proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            else:
+                proc = Run(["HandBrakeCLI","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
             os.remove("/tmp/download/"+oldfilepath)
@@ -240,7 +271,10 @@ def mainSerie():
             showname = showname.replace('(2020)', '') # fix amazing stories show
 
             downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/amerikaanse series/" + fullpath + "\'")
-            proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
+                proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            else:
+                proc = Run(["HandBrakeCLI","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
             os.remove("/tmp/download/"+oldfilepath)
@@ -251,7 +285,10 @@ def mainSerie():
             else:
                 addSerieToStreama(showname, seasonnumber, episodenumber[0].split("E",1)[1], episodeurl)
 
-mainSerie()
+print(AutoSelectSubNeeded("/home/gijs/Videos/Shrek (2001)/Shrek.2001.1080p.BluRay.H264.AAC-RARBG.mp4"))
 
-## FIX MOVIE DEDUPE (Movies/...Rarbg.mp4 vs Elysium (2013).mp4)
-## FIX JAPANESE SUBS NOT ENCODING
+
+## pip install selenium
+## pip install subprocess32
+## handbrake / handbrake cli
+## https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
