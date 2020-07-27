@@ -294,6 +294,7 @@ mainMovie()
 ## sudo apt install handbrake-cli
 ## curl https://rclone.org/install.sh | sudo bash
 ## https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
+## sudo apt install ffmpeg (ffprobe)
 ## Firewall IP
 
 ## Dual Audio: ENG / JAPANESE
