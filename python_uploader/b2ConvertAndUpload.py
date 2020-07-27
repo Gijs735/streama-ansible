@@ -295,3 +295,5 @@ mainMovie()
 ## curl https://rclone.org/install.sh | sudo bash
 ## https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
 ## Firewall IP
+
+## Dual Audio: ENG / JAPANESE
