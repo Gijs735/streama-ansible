@@ -1,4 +1,10 @@
 ---
+- name: restart apache2 here, because geerlingguy is retarded
+  service:
+    name: apache2
+    state: restarted
+    enabled: yes
+
 - name: copy backblaze auth worker
   template:
     src: b2AuthorizeCfWorker.j2
