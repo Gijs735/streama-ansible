@@ -29,7 +29,6 @@ nginx_revproxy_sites:
     domains:                                                  
       - fireflix.stream
       - www.fireflix.stream
-      - test1.fireflix.stream
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8080 }
     ssl: true                                                 
@@ -40,7 +39,6 @@ nginx_revproxy_sites:
     domains:                                                  
       - app.fireflix.stream
       - www.app.fireflix.stream
-      - test2.fireflix.stream
     upstreams:                                                
       - { backend_address: 127.0.0.1, backend_port: 8081 }
     ssl: true                                                 
@@ -59,3 +57,13 @@ backup_database_script: |
   /usr/local/bin/b2 authorize-account {{ b2AppKeyIdBackup }} {{ b2AppKeyBackup }}
   /usr/local/bin/b2 sync /opt/dbbackup b2://dbbucket
   /usr/local/bin/b2 upload-file dbbucket /var/log/cloud-init-output.log cloud-init-output.log
+
+## apache ##
+
+apache_remove_default_vhost: true
+apache_listen_ip: "127.0.0.1"
+apache_listen_port: 8080
+apache_global_vhost_settings: |
+  DirectoryIndex index.php index.html
+  documentroot: "/var/www/html"
+apache_create_vhosts: true

@@ -6,6 +6,7 @@
   - vars.yml
   roles:
     - role: geerlingguy.mysql
+    - role: geerlingguy.apache 
     - role: backup_and_automation
     - role: firewall
     - role: streama
