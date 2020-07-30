@@ -1,6 +1,12 @@
 ---
 - name: create webroot
   file:
+    path: /var/www
+    state: directory
+    mode: '0777'
+
+- name: create webroot
+  file:
     path: /var/www/html
     state: directory
     mode: '0777'
