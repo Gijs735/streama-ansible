@@ -1,4 +1,10 @@
 ---
+- name: create webroot
+  file:
+    path: /var/www/html
+    state: directory
+    mode: '0777'
+
 - name: Install Java 8
   package:
     name: openjdk-8-jre

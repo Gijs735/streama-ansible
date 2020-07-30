@@ -1,10 +1,4 @@
 ---
-- name: create webroot
-  file:
-    path: /var/www/html
-    state: directory
-    mode: '0777'
-
 - name: Install certbot-auto
   get_url:
     url: https://dl.eff.org/certbot-auto
