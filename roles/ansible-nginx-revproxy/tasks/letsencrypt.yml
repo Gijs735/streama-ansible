@@ -1,4 +1,9 @@
 ---
+- name: create webroot
+  file:
+    path: /var/www/html
+    state: directory
+    mode: '0777'
 
 - name: Install certbot-auto
   get_url:
@@ -73,7 +78,7 @@
 - name: Generate certs (first time)
   command: |
     certbot{{ '-auto' if nginx_revproxy_certbot_auto else '' }} certonly
-    --webroot -w /var/www/{{ item.key }}
+    --webroot -w /var/www/html
     -d {{ item.value.domains | join(' -d ') }}
     --email {{ item.value.letsencrypt_email }}
     --non-interactive --cert-name {{ item.key }}
