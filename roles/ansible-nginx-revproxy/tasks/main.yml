@@ -173,17 +173,6 @@
   tags:
     - nginxrevproxy
 
-- name: Remove WebRoot Sites
-  file:
-    path: /var/www/{{ item }}/
-    state: absent
-  with_items: "{{ webroot.stdout_lines }}"
-  notify: Reload Nginx
-  when:
-    - item not in nginx_revproxy_sites
-  tags:
-    - nginxrevproxy
-
 - include_tasks: letsencrypt.yml
   tags:
     - lesencrypt
