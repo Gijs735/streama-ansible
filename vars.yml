@@ -64,6 +64,5 @@ apache_remove_default_vhost: true
 apache_listen_ip: "127.0.0.1"
 apache_listen_port: 8080
 apache_global_vhost_settings: |
-  DirectoryIndex index.php index.html
-  documentroot: "/var/www/html"
+  DirectoryIndex index.html
 apache_create_vhosts: true
