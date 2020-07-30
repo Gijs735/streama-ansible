@@ -115,3 +115,12 @@ renew --post-hook \"systemctl reload nginx\" >> /var/log/letsencrypt/letsencrypt
   tags:
     - lesencrypt
     - nginxrevproxy
+
+- name: apache should only use port 8080
+  shell: 'echo "Listen {{ apache_listen_port }}" > /etc/apache2/ports.conf'
+
+- name: restart apache2 here, because geerlingguy is retarded
+  service:
+    name: apache2
+    state: restarted
+    enabled: yes
