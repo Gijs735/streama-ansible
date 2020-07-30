@@ -6,3 +6,8 @@
     ```
 - Put the splitted tar files in here.
 - This solves the 100MB problem.
+- Tar the frontendend like this:
+   ```
+   tar cvf frontend.tar -C streama-frontback .
+   ```
+- Make sure it doesn't include the .git directory!

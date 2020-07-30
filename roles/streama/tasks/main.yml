@@ -30,10 +30,10 @@
     mode: '0777'
 
 - name: Untar the archives
-  shell: cat /opt/streama.tar.gz.* | tar xzvf - -C /opt && cat /opt/frontend.tar.gz | tar xzvf - -C /var/www/html
+  shell: cat /opt/streama.tar.gz.* | tar xzvf - -C /opt && tar -xvf /opt/frontend.tar -C /var/www/html
 
 - name: remove the archives
-  shell: /bin/rm -rf /opt/streama.tar.gz.* && /bin/rm -rf /opt/frontend.tar.gz
+  shell: /bin/rm -rf /opt/streama.tar.gz.* && /bin/rm -rf /opt/frontend.tar
 
 - name: Set permissions for the jar
   file:

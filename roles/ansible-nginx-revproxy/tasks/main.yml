@@ -177,3 +177,8 @@
   tags:
     - lesencrypt
     - nginxrevproxy
+
+- name: renove apache2 index
+  file:
+    name: /var/www/html/index.nginx-debian.html
+    state: absent
