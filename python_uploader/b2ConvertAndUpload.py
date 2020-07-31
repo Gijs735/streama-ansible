@@ -238,9 +238,9 @@ def mainMovie():
 
             downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/films/" + fullpath + "\'")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
-                proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             else:
-                proc = Run(["HandBrakeCLI","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
             os.remove("/tmp/download/"+oldfilepath)
@@ -275,9 +275,9 @@ def mainSerie():
 
             downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/amerikaanse series/" + fullpath + "\'")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
-                proc = Run(["HandBrakeCLI","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             else:
-                proc = Run(["HandBrakeCLI","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
             os.remove("/tmp/download/"+oldfilepath)
@@ -293,7 +293,13 @@ mainMovie()
 
 ## pip3 install selenium
 ## pip3 install subprocess32
-## sudo apt install handbrake-cli
+
+## sudo add-apt-repository ppa:alexlarsson/flatpak
+## sudo apt update
+## sudo apt install flatpak
+## flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+## flatpak --user install https://flathub.org/repo/appstream/fr.handbrake.ghb.flatpakref
+
 ## curl https://rclone.org/install.sh | sudo bash
 ## https://tecadmin.net/setup-selenium-chromedriver-on-ubuntu/
 ## sudo apt install ffmpeg (ffprobe)
