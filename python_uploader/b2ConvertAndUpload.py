@@ -114,6 +114,7 @@ def uploadToBackBlaze(convertedFile, b2path):
 def addMovieToStreama(moviename,movieyear,movieurl):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://app.fireflix.stream/login/auth")
     WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
@@ -169,6 +170,7 @@ def addMovieToStreama(moviename,movieyear,movieurl):
 def addSerieToStreama(showname, seasonnumber, episodenumber, episodeurl):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://app.fireflix.stream/login/auth")
     WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Username']")))
