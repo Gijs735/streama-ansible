@@ -293,6 +293,7 @@ mainMovie()
 
 ## pip3 install selenium
 ## pip3 install subprocess32
+## pip3 install --upgrade setuptools
 
 ## sudo add-apt-repository ppa:alexlarsson/flatpak
 ## sudo apt update
