@@ -230,9 +230,9 @@ def addSerieToStreama(showname, seasonnumber, episodenumber, episodeurl):
     
 
 def mainMovie():
-    # createFileList("sftp_hetzner:/G:/films", "data/src_movielist.txt")
-    # createFileList("b2:devbucket735/Movies", "data/dest_movielist.txt")
-    # dedupeFileLists("data/src_movielist.txt", "data/dest_movielist.txt", "data/parsedMovielist.txt", True)
+    createFileList("sftp_hetzner:/G:/films", "data/src_movielist.txt")
+    createFileList("b2:devbucket735/Movies", "data/dest_movielist.txt")
+    dedupeFileLists("data/src_movielist.txt", "data/dest_movielist.txt", "data/parsedMovielist.txt", True)
     with open("data/parsedMovielist.txt",'r') as f:
         lines = f.readlines()
         for line in lines:
@@ -245,13 +245,13 @@ def mainMovie():
             b2mp4path="devbucket735/Movies/"+oldfilefolder
             movieurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/Movies/"+oldfilefolder+"/"+oldfilefolder + ".mp4")
 
-            # downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/films/" + fullpath + "\"")
-            # if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
-            #     proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
-            # else:
-            #     proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
-            # Trace(proc)
-            # uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
+            downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/films/" + fullpath + "\"")
+            if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
+                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            else:
+                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            Trace(proc)
+            uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
             os.remove("/tmp/download/"+oldfilepath)
             addMovieToStreama(oldfilefolder[:-6], oldfilefolder[-5:-1], movieurl)
 
