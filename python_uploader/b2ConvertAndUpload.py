@@ -230,6 +230,7 @@ def mainMovie():
             fullpath=line.rstrip()
             oldfilepath=(line.rstrip()).split('/', 1)[-1]
             oldfilefolder=(line.rstrip()).split('/', 1)[0]
+            oldfilepath = oldfilepath.replace("'", "\\'")
             
             filepathmp4=os.path.splitext(oldfilefolder)[0]+".mp4"
             fullfilepathmp4="\'"+"/tmp/output/"+filepathmp4+"\'"
@@ -257,6 +258,7 @@ def mainSerie():
             fullpath=line.rstrip()
             oldfilepath=(line.rstrip()).split('/', 2)[-1]
             oldfilefolder=(line.rstrip()).rsplit('/', 1)[0]
+            oldfilepath = oldfilepath.replace("'", "\\'")
             
             filepathmp4=os.path.splitext(oldfilepath)[0]+".mp4"
             fullfilepathmp4="\'"+"/tmp/output/"+filepathmp4+"\'"
