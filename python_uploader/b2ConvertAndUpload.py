@@ -232,7 +232,7 @@ def mainMovie():
             oldfilefolder=(line.rstrip()).split('/', 1)[0]
             
             filepathmp4=os.path.splitext(oldfilefolder)[0]+".mp4"
-            fullfilepathmp4="\'"+"/tmp/output/"+filepathmp4+"\'"
+            fullfilepathmp4="\""+"/tmp/output/"+filepathmp4+"\""
             b2mp4path="devbucket735/Movies/"+oldfilefolder
             movieurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/Movies/"+oldfilefolder+"/"+oldfilefolder + ".mp4")
 
@@ -259,7 +259,7 @@ def mainSerie():
             oldfilefolder=(line.rstrip()).rsplit('/', 1)[0]
             
             filepathmp4=os.path.splitext(oldfilepath)[0]+".mp4"
-            fullfilepathmp4="\'"+"/tmp/output/"+filepathmp4+"\'"
+            fullfilepathmp4="\""+"/tmp/output/"+filepathmp4+"\""
             b2mp4path="devbucket735/TV/"+oldfilefolder
 
             episodeurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/TV/"+oldfilefolder+"/" + filepathmp4)
@@ -274,11 +274,11 @@ def mainSerie():
             showname = showname.replace('(2020)', '') # fix amazing stories show
 
             downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/amerikaanse series/" + fullpath + "\"")
-            if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
-                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
-            else:
-                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
-            Trace(proc)
+            # if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
+            #     proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            # else:
+            #     proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+            # Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
             os.remove("/tmp/download/"+oldfilepath)
 
