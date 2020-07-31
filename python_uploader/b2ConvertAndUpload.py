@@ -296,6 +296,7 @@ mainMovie()
 ## pip3 install --upgrade setuptools
 
 ## sudo add-apt-repository ppa:alexlarsson/flatpak
+## sudo apt install policykit-1
 ## sudo apt update
 ## sudo apt install flatpak
 ## flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
