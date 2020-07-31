@@ -230,14 +230,13 @@ def mainMovie():
             fullpath=line.rstrip()
             oldfilepath=(line.rstrip()).split('/', 1)[-1]
             oldfilefolder=(line.rstrip()).split('/', 1)[0]
-            oldfilepath = oldfilepath.replace("'", "\\'")
             
             filepathmp4=os.path.splitext(oldfilefolder)[0]+".mp4"
             fullfilepathmp4="\'"+"/tmp/output/"+filepathmp4+"\'"
             b2mp4path="devbucket735/Movies/"+oldfilefolder
             movieurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/Movies/"+oldfilefolder+"/"+oldfilefolder + ".mp4")
 
-            downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/films/" + fullpath + "\'")
+            downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/films/" + fullpath + "\"")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
                 proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             else:
@@ -258,7 +257,6 @@ def mainSerie():
             fullpath=line.rstrip()
             oldfilepath=(line.rstrip()).split('/', 2)[-1]
             oldfilefolder=(line.rstrip()).rsplit('/', 1)[0]
-            oldfilepath = oldfilepath.replace("'", "\\'")
             
             filepathmp4=os.path.splitext(oldfilepath)[0]+".mp4"
             fullfilepathmp4="\'"+"/tmp/output/"+filepathmp4+"\'"
@@ -275,7 +273,7 @@ def mainSerie():
             showname = showname.replace('(2019)', '') # fix another life show
             showname = showname.replace('(2020)', '') # fix amazing stories show
 
-            downloadFileToTemp("sftp_hetzner:" + "\'" + "/G:/amerikaanse series/" + fullpath + "\'")
+            downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/amerikaanse series/" + fullpath + "\"")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
                 proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             else:
