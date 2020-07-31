@@ -36,9 +36,9 @@ def getAudioLanguage(file):
     return out
 
 def AutoSelectSubNeeded(file):
-    if not "eng" in getAudioLanguage(file):
+    if not "eng" in getAudioLanguage(file) or ("jpn" in getAudioLanguage(file) and "eng" in getAudioLanguage(file)):
         print("English audio not detected in: " + file)
-        print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language:")
+        print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language or is dual language:")
         userinput = input()
         if userinput == "y" or userinput == "Y":
             return False
