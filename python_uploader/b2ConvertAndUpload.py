@@ -242,7 +242,7 @@ def mainMovie():
             else:
                 proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             Trace(proc)
-            uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
+            uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
             os.remove("/tmp/download/"+oldfilepath)
             addMovieToStreama(oldfilefolder[:-6], oldfilefolder[-5:-1], movieurl)
 
@@ -279,7 +279,7 @@ def mainSerie():
             else:
                 proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             Trace(proc)
-            uploadToBackBlaze(fullfilepathmp4,"b2:" + "\'" + b2mp4path + "\'")
+            uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
             os.remove("/tmp/download/"+oldfilepath)
 
             if len(episodenumber) > 1:
