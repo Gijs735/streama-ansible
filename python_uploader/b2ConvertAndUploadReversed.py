@@ -252,6 +252,8 @@ def mainMovie():
             fullfilepathmp4="\""+"/tmp/output/"+filepathmp4+"\""
             b2mp4path="devbucket735/Movies/"+oldfilefolder
             movieurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/Movies/"+oldfilefolder+"/"+oldfilefolder + ".mp4")
+            fullpath=fullpath.replace("$", "\\$") #fix dollar sign bug
+            oldfilepath=oldfilepath.replace("$", "\\$") #fix dollar sign bug
 
             downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/films/" + fullpath + "\"")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
@@ -289,6 +291,8 @@ def mainSerie():
             episodenumber = re.findall(r"E[0-9]+",oldfilepath)
             showname = showname.replace('(2019)', '') # fix another life show
             showname = showname.replace('(2020)', '') # fix amazing stories show
+            fullpath=fullpath.replace("$", "\\$") #fix dollar sign bug
+            oldfilepath=oldfilepath.replace("$", "\\$") #fix dollar sign bug
 
             downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/amerikaanse series/" + fullpath + "\"")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
