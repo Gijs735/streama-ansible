@@ -29,6 +29,7 @@ def Trace(proc):
             proc.stdout.flush()
 
 def getAudioLanguage(file):
+    file.replace("\\$", "$") # fix dollar bug
     cmnd = ['ffprobe', file, '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
     p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out =  p.communicate()[0]
