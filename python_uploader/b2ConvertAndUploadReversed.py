@@ -29,13 +29,14 @@ def Trace(proc):
             proc.stdout.flush()
 
 def getAudioLanguage(file):
-    cmnd = ['ffprobe', "\""+file+"\"", '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
+    cmnd = ['ffprobe', file, '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
     p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out =  p.communicate()[0]
     out = (out.decode('utf-8'))
     return out
 
 def AutoSelectSubNeeded(file):
+    file="\""+file+"\""
     if not "eng" in getAudioLanguage(file) or ("jpn" in getAudioLanguage(file) and "eng" in getAudioLanguage(file)):
         print("English audio not detected in: " + file)
         print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language or is dual language:")
