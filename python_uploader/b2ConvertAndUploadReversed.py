@@ -17,7 +17,7 @@ from selenium.webdriver.common.by import By
 def Run(command):
     proc = subprocess.Popen(command,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-        universal_newlines=True)
+        universal_newlines=True, shell=True)
     return proc
 
 
@@ -30,7 +30,7 @@ def Trace(proc):
 
 def getAudioLanguage(file):
     cmnd = ['ffprobe', file, '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
-    p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     out =  p.communicate()[0]
     out = (out.decode('utf-8'))
     return out
