@@ -89,7 +89,7 @@ def dedupeFileLists(file1, file2, outputfile, movie = False):
             for line in lines:
                 lineinlowercase = os.path.splitext(line.lower())[0]
                 if lineinlowercase.split("/", 1)[0] not in lower_filter_lines:
-                    if not "\$pringfield" in lineinlowercase:
+                    if not "or, how i learned to stop worrying and love legalized gamblin" in lineinlowercase:
                         target.write(line)
     print("Created deduped file: " + outputfile + " containing content from: " + file1 + " minus the content from: " + file2)
 
