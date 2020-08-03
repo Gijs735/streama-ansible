@@ -282,7 +282,6 @@ def mainSerie():
             
             filepathmp4=os.path.splitext(oldfilepath)[0]+".mp4"
             fullfilepathmp4="\""+"/tmp/output/"+filepathmp4+"\""
-            oldfilepath=oldfilepath.replace("\\$", "$") #fix dollar sign bug
             b2mp4path="devbucket735/TV/"+oldfilefolder
 
             episodeurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/TV/"+oldfilefolder+"/" + filepathmp4)
