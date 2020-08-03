@@ -29,8 +29,7 @@ def Trace(proc):
             proc.stdout.flush()
 
 def getAudioLanguage(file):
-    file.replace("\\$", "$") # fix dollar bug
-    cmnd = ['ffprobe', file, '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
+    cmnd = ['ffprobe', "\""+file+"\"", '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
     p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out =  p.communicate()[0]
     out = (out.decode('utf-8'))
@@ -277,6 +276,8 @@ def mainSerie():
             fullpath=line.rstrip()
             oldfilepath=(line.rstrip()).split('/', 2)[-1]
             oldfilefolder=(line.rstrip()).rsplit('/', 1)[0]
+            fullpath=fullpath.replace("$", "\\$") #fix dollar sign bug
+            oldfilepath=oldfilepath.replace("$", "\\$") #fix dollar sign bug
             
             filepathmp4=os.path.splitext(oldfilepath)[0]+".mp4"
             fullfilepathmp4="\""+"/tmp/output/"+filepathmp4+"\""
@@ -292,17 +293,15 @@ def mainSerie():
             episodenumber = re.findall(r"E[0-9]+",oldfilepath)
             showname = showname.replace('(2019)', '') # fix another life show
             showname = showname.replace('(2020)', '') # fix amazing stories show
-            fullpath=fullpath.replace("$", "\\$") #fix dollar sign bug
-            oldfilepath=oldfilepath.replace("$", "\\$") #fix dollar sign bug
 
             downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/amerikaanse series/" + fullpath + "\"")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
-                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","\"/tmp/download/"+oldfilepath+"\"","-o","\"/tmp/output/"+filepathmp4+"\""])
             else:
-                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","\"/tmp/download/"+oldfilepath+"\"","-o","\"/tmp/output/"+filepathmp4+"\""])
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
-            os.remove("/tmp/download/"+oldfilepath)
+            os.remove("\"/tmp/download/"+oldfilepath+"\"")
 
             if len(episodenumber) > 1:
                 for epnum in range(int(episodenumber[0].split("E",1)[1]), int(episodenumber[1].split("E",1)[1]) + 1):
