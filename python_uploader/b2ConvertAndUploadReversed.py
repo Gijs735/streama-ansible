@@ -17,7 +17,7 @@ from selenium.webdriver.common.by import By
 def Run(command):
     proc = subprocess.Popen(command,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-        universal_newlines=True, shell=True)
+        universal_newlines=True)
     return proc
 
 
@@ -30,13 +30,12 @@ def Trace(proc):
 
 def getAudioLanguage(file):
     cmnd = ['ffprobe', file, '-show_entries', 'stream=index:stream_tags=language', '-select_streams', 'a', '-v', '0', '-of', 'compact=p=0:nk=1']
-    p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    p = subprocess.Popen(cmnd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out =  p.communicate()[0]
     out = (out.decode('utf-8'))
     return out
 
 def AutoSelectSubNeeded(file):
-    file="\""+file+"\""
     if not "eng" in getAudioLanguage(file) or ("jpn" in getAudioLanguage(file) and "eng" in getAudioLanguage(file)):
         print("English audio not detected in: " + file)
         print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language or is dual language:")
@@ -253,8 +252,6 @@ def mainMovie():
             fullfilepathmp4="\""+"/tmp/output/"+filepathmp4+"\""
             b2mp4path="devbucket735/Movies/"+oldfilefolder
             movieurl = "https://" + quote("cdn.fireflix.stream/file/"  + "devbucket735/Movies/"+oldfilefolder+"/"+oldfilefolder + ".mp4")
-            fullpath=fullpath.replace("$", "\\$") #fix dollar sign bug
-            oldfilepath=oldfilepath.replace("$", "\\$") #fix dollar sign bug
 
             downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/films/" + fullpath + "\"")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
@@ -277,8 +274,6 @@ def mainSerie():
             fullpath=line.rstrip()
             oldfilepath=(line.rstrip()).split('/', 2)[-1]
             oldfilefolder=(line.rstrip()).rsplit('/', 1)[0]
-            fullpath=fullpath.replace("$", "\\$") #fix dollar sign bug
-            oldfilepath=oldfilepath.replace("$", "\\$") #fix dollar sign bug
             
             filepathmp4=os.path.splitext(oldfilepath)[0]+".mp4"
             fullfilepathmp4="\""+"/tmp/output/"+filepathmp4+"\""
@@ -297,12 +292,12 @@ def mainSerie():
 
             downloadFileToTemp("sftp_hetzner:" + "\"" + "/G:/amerikaanse series/" + fullpath + "\"")
             if AutoSelectSubNeeded("/tmp/download/"+oldfilepath) == False:
-                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","\"/tmp/download/"+oldfilepath+"\"","-o","\"/tmp/output/"+filepathmp4+"\""])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_handbrake.json","-Z","Streama","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             else:
-                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","\"/tmp/download/"+oldfilepath+"\"","-o","\"/tmp/output/"+filepathmp4+"\""])
+                proc = Run(["flatpak","run","--filesystem=/tmp","--filesystem=/root","--command=HandBrakeCLI","fr.handbrake.ghb","--preset-import-file","streama_subs.json","-Z","Streama_subs","-i","/tmp/download/"+oldfilepath,"-o","/tmp/output/"+filepathmp4])
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
-            os.remove("\"/tmp/download/"+oldfilepath+"\"")
+            os.remove("/tmp/download/"+oldfilepath)
 
             if len(episodenumber) > 1:
                 for epnum in range(int(episodenumber[0].split("E",1)[1]), int(episodenumber[1].split("E",1)[1]) + 1):
@@ -310,7 +305,7 @@ def mainSerie():
             else:
                 addSerieToStreama(showname, seasonnumber, episodenumber[0].split("E",1)[1], episodeurl)
 
-mainSerie()
+mainMovie()
 
 
 ## pip3 install selenium
