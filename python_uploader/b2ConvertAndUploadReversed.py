@@ -83,7 +83,7 @@ def dedupeFileLists(file1, file2, outputfile, movie = False):
         with open(outputfile, 'w') as target:
             for line in lines:
                 if os.path.splitext(line.lower())[0] not in lower_filter_lines:
-                    if "how i learned to stop worrying and love legalized gambling" not in lineinlowercase:
+                    if "how i learned to stop worrying and love legalized gambling" not in os.path.splitext(line.lower())[0]:
                         target.write(line)
     else:
         with open(outputfile, 'w') as target:
