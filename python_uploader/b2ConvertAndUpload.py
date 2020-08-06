@@ -303,7 +303,11 @@ def mainSerie():
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
             os.remove("/tmp/download/"+oldfilepath)
 
-            if len(episodenumber) > 1:
+            if "Ben 10- Omniverse" in oldfilefolder:
+                print("url: " + episodeurl)
+                print("episode: " + oldfilepath)
+                input("Press Enter to continue when this is done...")
+            elif len(episodenumber) > 1:
                 for epnum in range(int(episodenumber[0].split("E",1)[1]), int(episodenumber[1].split("E",1)[1]) + 1):
                     addSerieToStreama(showname, seasonnumber, str(epnum), episodeurl)
             else:
