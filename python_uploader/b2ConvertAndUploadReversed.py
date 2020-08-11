@@ -14,6 +14,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+lastnumber = 0
+lastchoice = "y"
+
 def Run(command):
     proc = subprocess.Popen(command,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
@@ -36,16 +39,30 @@ def getAudioLanguage(file):
     return out
 
 def AutoSelectSubNeeded(file):
+    if not lastnumber <= 0:
+        lastnumber = lastnumber - 1
+        if lastchoice == "y" or lastchoice == "Y":
+            return False
+        elif lastchoice == "n" or lastchoice == "N":
+            return True
     if not "eng" in getAudioLanguage(file) or ("jpn" in getAudioLanguage(file) and "eng" in getAudioLanguage(file)):
         print("English audio not detected in: " + file)
         print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language or is dual language:")
         userinput = input()
-        if userinput == "y" or userinput == "Y":
-            return False
-        elif userinput == "n" or userinput == "N":
-            return True
+        if not userinput.isdecimal():
+            if userinput == "y" or userinput == "Y":
+                return False
+            elif userinput == "n" or userinput == "N":
+                return True
+            else:
+                return AutoSelectSubNeeded(file)
         else:
-            return AutoSelectSubNeeded(file)
+            lastnumber = int(userinput)
+            print("Following choice will be done " + lastnumber + "times.")
+            print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language or is dual language:")
+            userinput2 = input()
+            lastchoice = userinput2
+            AutoSelectSubNeeded(file)
     else:
         return False
 
