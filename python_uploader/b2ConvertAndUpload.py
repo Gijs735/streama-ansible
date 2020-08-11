@@ -39,6 +39,8 @@ def getAudioLanguage(file):
     return out
 
 def AutoSelectSubNeeded(file):
+    global lastnumber
+    global lastchoice
     if not lastnumber <= 0:
         lastnumber = lastnumber - 1
         if lastchoice == "y" or lastchoice == "Y":
