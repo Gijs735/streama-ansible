@@ -60,7 +60,7 @@ def AutoSelectSubNeeded(file):
                 return AutoSelectSubNeeded(file)
         else:
             lastnumber = int(userinput)
-            print("Following choice will be done " + lastnumber + "times.")
+            print("Following choice will be done " + str(lastnumber) + "times.")
             print("Enter 'y/Y' if the video is in english, enter 'n/N' if it is in another language or is dual language:")
             userinput2 = input()
             lastchoice = userinput2
