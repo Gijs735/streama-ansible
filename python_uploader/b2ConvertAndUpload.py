@@ -322,7 +322,7 @@ def mainSerie():
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
             os.remove("/tmp/download/"+oldfilepath)
 
-            if "Ben 10- Omniverse" in oldfilefolder:
+            if "Adventure time" in oldfilefolder:
                 print("url: " + episodeurl)
                 print("episode: " + oldfilepath)
                 input("Press Enter to continue when this is done...")
