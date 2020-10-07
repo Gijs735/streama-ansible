@@ -219,6 +219,7 @@ def addSerieToStreama(showname, seasonnumber, episodenumber, episodeurl):
     searchmoviefield.send_keys(showname)
     time.sleep(5)
     addmovieandopenbutton = driver.find_element_by_xpath("//div[@class='media-list similar-media']//div[1]//div[1]//div[1]//button[1]")
+    time.sleep(5)
     addmovieandopenbutton.click()
     time.sleep(5)
     fetchepisodes = driver.find_element_by_xpath("//button[@class='btn btn-primary ng-scope']")
