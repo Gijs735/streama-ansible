@@ -328,7 +328,7 @@ def mainSerie():
             else:
                 addSerieToStreama(showname, seasonnumber, episodenumber[0].split("E",1)[1], episodeurl)
 
-mainMovie()
+mainSerie()
 
 
 ## pip3 install selenium
