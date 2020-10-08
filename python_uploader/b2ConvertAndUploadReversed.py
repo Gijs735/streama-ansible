@@ -319,8 +319,10 @@ def mainSerie():
             Trace(proc)
             uploadToBackBlaze(fullfilepathmp4,"b2:" + "\"" + b2mp4path + "\"")
             os.remove("/tmp/download/"+oldfilepath)
-
-            if len(episodenumber) > 1:
+            
+            if "Titans (2018)" in oldfilefolder:
+                print("skipping streama add...")
+            elif len(episodenumber) > 1:
                 for epnum in range(int(episodenumber[0].split("E",1)[1]), int(episodenumber[1].split("E",1)[1]) + 1):
                     addSerieToStreama(showname, seasonnumber, str(epnum), episodeurl)
             else:
