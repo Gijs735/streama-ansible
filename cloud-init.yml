@@ -1,0 +1,29 @@
+#cloud-config
+# vim: syntax=yaml
+bootcmd:
+    - echo "password" > /tmp/db_password
+write_files:
+- content: |
+    #!/bin/bash
+    #--------------------------------------
+    sleep 10
+    export HOME=/root
+    cd /root
+    apt-get update
+    apt-get install -y git ansible python3-setuptools
+    git clone https://github.com/Gijs735/streama-ansible.git
+
+    cat /tmp/db_password > /root/streama-ansible/password
+    cd /root/streama-ansible
+    ansible-galaxy install -r requirements.yml
+    ansible-playbook --vault-id db@password main.yml
+    cd /root
+    rm -rf /root/streama-ansible
+    rm -rf /tmp/db_password
+    rm -rf /root/B2_Command_Line_Tool
+    /bin/bash /root/backup_database.sh
+    #--------------------------------------
+  path: /root/cloud-init.sh
+  permissions: '0777'
+runcmd:
+    - [ /bin/bash, /root/cloud-init.sh ]
